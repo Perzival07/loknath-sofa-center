@@ -1,211 +1,312 @@
-# 🎯 Full Stack E-comerce Website Using MERN
+# 🛋️ Loknath Sofa Center - E-commerce Platform
 
-This is a complete **Full Stack E-commerce Web Application** built using the MERN stack (MongoDB, Express.js, React, Node.js) with secure Stripe payment integration. It includes all the core features of a modern e-commerce platform such as product listing, shopping cart, user authentication, order management, and payment processing. Whether you're learning MERN or building a real-world e-commerce solution, this project provides a solid foundation for scalable and production-ready applications.
+A full-stack e-commerce web application built using the MERN stack (MongoDB, Express.js, React, Node.js) designed specifically for **Loknath Sofa Center**. It features product listing, a dynamic shopping cart, secure payments, order management, and a dedicated administrative dashboard to manage the entire store.
 
-## 🎯 Project Objectives
+## ✨ Project Novelty & Highlights
 
-- **🔧 Build a complete MERN stack application** that follows modern development practices and architecture.
-- **🎨 Develop a responsive and user-friendly UI** using React JS for seamless user experience across all devices.
-- **🛡️ Implement user authentication and authorization** using JSON Web Tokens (JWT) for secure login and route protection.
-- **🛒 Design a dynamic cart and checkout system** that supports both Cash on Delivery (COD) and Stripe payment processing.
-- **🗃️ Manage product and order data** efficiently using MongoDB and Mongoose for database operations.
-- **💼 Include an Admin Dashboard** for managing products, users, and orders with real-time updates.
-- **💳 Integrate Stripe API** to securely handle online payments and transaction management.
-- **📦 Enable order tracking, history, and user account management** for a full-fledged e-commerce experience.
-- **📁 Maintain clean, modular, and reusable code structure** to facilitate scalability and collaboration.
+While many e-commerce templates are built for generic retail, this platform is deeply customized for the unique logistics of a **specialized furniture business**. Its core novelties include:
+- **Decoupled Admin Architecture:** Instead of handling admin privileges within the storefront application, the business administration is completely separated into its own standalone React application (`/admin`). This guarantees higher security, isolated performance, and a completely distraction-free workspace for business management.
+- **Hybrid Payment Ecosystem:** Seamlessly bridges global physical and digital payment methods tailored to the regional customer base, supporting international credit gateways (Stripe), local UPI/digital wallets (Razorpay), and traditional Cash on Delivery (COD). 
+- **Tailored Furniture Infrastructure:** Custom MongoDB schemas created specifically to support the complexities of furniture e-commerce, such as custom configurations, varied image assets (hosted on Cloudinary), and multi-stage order tracking.
 
 ## 🚀 Core Features
 
-- **User Registration & Login** (JWT Authentication)
-- **Admin Panel** for Product & Order Management
-- **Add to Cart** and Full Checkout Flow
-- **Cash on Delivery (COD)** & **Stripe Payment** Integration
-- **Responsive UI** (Mobile-friendly Design)
-- **Protected Routes** for Users and Admins
-- **Order History** and Detailed Order View
-- **Clean and Scalable Folder Structure**
+- **User Authentication:** Secure registration and login using JWT & Google Auth.
+- **Product Management:** Browse, search, and view detailed product information.
+- **Shopping Cart & Checkout:** Add products to the cart and smoothly process orders.
+- **Payment Integration:** Secure payment flows supporting Stripe, Razorpay, and Cash on Delivery (COD).
+- **Admin Dashboard:** A dedicated portal to manage inventory, users, and oversee orders.
+- **Responsive Design:** Fully responsive UI built with React and Tailwind CSS, providing a seamless mobile and desktop experience.
 
-## 🖥️ Tech Stack
+## 🖥️ Technologies & Tools Used
 
-- **Frontend:** React JS, React Router, Axios, Bootstrap/Tailwind CSS
-- **Backend:** Node.js, Express.js, MongoDB (with Mongoose)
-- **Authentication:** JSON Web Tokens (JWT)
-- **Payment Integration:** Stripe API
-- **State Management:** Context API (or Redux, optional)
-- **Deployment Ready:** Environment variables (`.env`), modular folder structure
+### Frontend Architecture
+- **React.js & Vite:** High-performance, component-based user interface using Vite for rapid HMR and optimized builds.
+- **Tailwind CSS:** Utility-first CSS framework for rapid, responsive UI design.
+- **React Router Dom:** For seamless Single Page Application (SPA) navigation.
+- **Axios:** Promise-based HTTP client for data fetching.
+- **React Toastify:** For elegant, interactive UI notifications.
 
-## 🔐 Credentials for authentication (for testing)
+### Backend Architecture
+- **Node.js & Express.js:** Scalable runtime and minimalist framework for building robust REST APIs.
+- **MongoDB & Mongoose:** NoSQL database tailored for diverse furniture listings alongside Object Data Modeling (ODM).
+- **JWT & bcrypt:** Secures user endpoints and effectively hashes passwords to prevent data leaks.
+- **Multer:** Handles multipart/form-data for seamless image file uploading.
 
-| Role  | Email             | Password |
-| ----- | ----------------- | -------- |
-| Admin | admin@example.com | admin123 |
-| User  | user@gmail.com    | user@123 |
+### Integrations & Services
+- **Cloudinary:** Cloud-based image hosting/delivery for optimized loading of heavy furniture visual assets.
+- **Stripe & Razorpay Node SDKs:** Server-side processing for global and local secure payment channels.
+- **Nodemailer:** Handles automated application emails (e.g., order confirmations).
 
-> ⚠️ 🔑 **Note:** Admin panel access is disabled for security reasons.  
->  To request access, please contact me via [LinkedIn](https://www.linkedin.com/in/pranto-kumar-a326801b3/)
+## 🔄 Project Workflow
 
-## 🔑 Credentials for payment (for testing)
+1. **User Discovery & Interaction:** Customers browse the product catalog on the React frontend. State operations handle filtering and searching seamlessly.
+2. **Cart & Authentication:** Users add desired furniture to their shopping cart. They are prompted to log in (via JWT/Google Auth) before checkout to secure their session.
+3. **Checkout & Transaction:** 
+   - Customers select Cash on Delivery (COD), Razorpay, or Stripe. 
+   - The frontend communicates securely with the Express API. Secure transaction sessions are uniquely verified via third-party webhooks.
+4. **Order Fulfillment Initiation:** Post-transaction, the Express backend updates MongoDB—flagging items, reducing available stock, and creating a formal `Order` document.
+5. **Admin Operation:** The store owner logs into the decoupled `/admin` React portal. They review live orders, update processing statuses (e.g., to "Shipped/Delivered"), and manage new store inventory entries.
 
-| Role     | Email          | Card No             | Date  | CVC | Phone      |
-| -------- | -------------- | ------------------- | ----- | --- | ---------- |
-| Stripe   | demo@gmail.com | 4242 4242 4242 4242 | 12/34 | 567 |            |
-| Razorpay | demo@gmail.com | 4386 2894 0766 0153 | 15/35 | 234 | 9876543210 |
+## 📐 Wireframing & Design Strategy
 
-## ⚙️ Local Installation & Setup Guide (Windows)
+The UX/UI of the Loknath Sofa Center was designed following a mobile-first philosophy to comfortably accommodate mobile user traffic:
+- **Storefront Navigation flow:**
+  `Home Landing (Hero & Promos)` ➡️ `Category Grids (Sofas, Chairs, Sets)` ➡️ `Detailed Product Page` ➡️ `Cart Drawer` ➡️ `Payment & Checkout Hub`.
+- **Component Styling:** Highly visual design relying on clean whitespace, Tailwind utility spacing, and consistent modular card layouts for showcasing furniture photography.
+- **Admin Navigation flow:**
+  `Secure Login Portal` ➡️ `Central Analytics Dashboard` ➡️ `Inventory List (CRUD interfaces)` ➡️ `Order Tracking Desk`.
 
-A step-by-step guide to install and run the Forever-Shopping MERN stack project locally on your Windows PC.
+## 🧱 Project Structure
 
-### ✅ Prerequisites
-
-Before starting, make sure the following tools are installed:
-
-| Tool          | Purpose                    | Download Link                                                                                |
-| ------------- | -------------------------- | -------------------------------------------------------------------------------------------- |
-| Node.js       | Backend & frontend runtime | [https://nodejs.org/](https://nodejs.org/)                                                   |
-| Git           | Clone GitHub repo          | [https://git-scm.com/](https://git-scm.com/)                                                 |
-| MongoDB Atlas | Cloud database             | [https://www.mongodb.com/cloud/atlas/register](https://www.mongodb.com/cloud/atlas/register) |
-| Code Editor   | VS Code recommended        | [https://code.visualstudio.com/](https://code.visualstudio.com/)                             |
-
-### 📥 Step 1: Clone the Project
-
-```bash
-git clone https://github.com/pranto113015/forever-shopping.git
-cd forever-shopping
+```text
+loknath-sofa-center/
+├── .gitignore
+├── README.md
+├── admin
+│   ├── .env
+│   ├── .gitignore
+│   ├── README.md
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.js
+│   ├── public
+│   │   ├── icon.png
+│   │   └── vite.svg
+│   ├── src
+│   │   ├── App.jsx
+│   │   ├── assets
+│   │   │   ├── add_icon.png
+│   │   │   ├── assets.js
+│   │   │   ├── logo.png
+│   │   │   ├── logo_login.png
+│   │   │   ├── order_icon.png
+│   │   │   ├── parcel_icon.svg
+│   │   │   └── upload_area.png
+│   │   ├── components
+│   │   │   ├── Login.jsx
+│   │   │   ├── Navbar.jsx
+│   │   │   └── Sidebar.jsx
+│   │   ├── index.css
+│   │   ├── main.jsx
+│   │   ├── pages
+│   │   │   ├── Add.jsx
+│   │   │   ├── Customers.jsx
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── List.jsx
+│   │   │   └── Orders.jsx
+│   │   └── utils
+│   │       └── dimensionsConverter.js
+│   ├── tailwind.config.js
+│   ├── vercel.json
+│   └── vite.config.js
+├── assets
+│   └── logos
+│       └── logoFinal.png
+├── backend
+│   ├── .env
+│   ├── .env.example
+│   ├── README.md
+│   ├── config
+│   │   ├── cloudinary.js
+│   │   ├── mongodb.js
+│   │   └── validateEnv.js
+│   ├── controllers
+│   │   ├── cartController.js
+│   │   ├── deliveryController.js
+│   │   ├── orderController.js
+│   │   ├── productController.js
+│   │   ├── reviewController.js
+│   │   ├── userController.js
+│   │   └── wishlistController.js
+│   ├── middleware
+│   │   ├── adminAuth.js
+│   │   ├── auth.js
+│   │   ├── multer.js
+│   │   ├── rateLimiter.js
+│   │   └── validation.js
+│   ├── models
+│   │   ├── orderModel.js
+│   │   ├── passwordResetModel.js
+│   │   ├── productModel.js
+│   │   ├── refreshTokenModel.js
+│   │   ├── reviewModel.js
+│   │   ├── userModel.js
+│   │   └── wishlistModel.js
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── routes
+│   │   ├── cartRoute.js
+│   │   ├── deliveryRoute.js
+│   │   ├── orderRoute.js
+│   │   ├── productRoute.js
+│   │   ├── reviewRoute.js
+│   │   ├── userRoute.js
+│   │   └── wishlistRoute.js
+│   ├── server.js
+│   ├── services
+│   │   └── emailService.js
+│   ├── utils
+│   │   ├── deliveryCalculator.js
+│   │   └── logger.js
+│   └── vercel.json
+└── frontend
+    ├── .env
+    ├── .env.example
+    ├── .gitignore
+    ├── README.md
+    ├── eslint.config.js
+    ├── index.html
+    ├── package-lock.json
+    ├── package.json
+    ├── postcss.config.js
+    ├── public
+    │   ├── icon.png
+    │   └── vite.svg
+    ├── src
+    │   ├── App.jsx
+    │   ├── assets
+    │   │   ├── about_img.png
+    │   │   ├── assets.js
+    │   │   ├── bin_icon.png
+    │   │   ├── cart_icon.png
+    │   │   ├── contact_img.png
+    │   │   ├── cross_icon.png
+    │   │   ├── dropdown_icon.png
+    │   │   ├── exchange_icon.png
+    │   │   ├── hero_img.jpg
+    │   │   ├── logo.png
+    │   │   ├── menu_icon.png
+    │   │   ├── profile_icon.png
+    │   │   ├── quality_icon.png
+    │   │   ├── razorpay_logo.png
+    │   │   ├── search_icon.png
+    │   │   ├── star_dull_icon.png
+    │   │   ├── star_icon.png
+    │   │   ├── stripe_logo.png
+    │   │   ├── support_img.png
+    │   │   ├── upi_qr.jpeg
+    │   │   └── wishlist_icon.svg
+    │   ├── components
+    │   │   ├── BestSeller.jsx
+    │   │   ├── CartTotal.jsx
+    │   │   ├── Footer.jsx
+    │   │   ├── GoogleBusinessProfile.jsx
+    │   │   ├── Hero.jsx
+    │   │   ├── LatestCollection.jsx
+    │   │   ├── LoadingSkeleton.jsx
+    │   │   ├── Navbar.jsx
+    │   │   ├── NewsletterBox.jsx
+    │   │   ├── OurPolicy.jsx
+    │   │   ├── ProducItem.jsx
+    │   │   ├── RelatedProducts.jsx
+    │   │   ├── SearchBar.jsx
+    │   │   └── Title.jsx
+    │   ├── context
+    │   │   └── ShopContext.jsx
+    │   ├── index.css
+    │   ├── main.jsx
+    │   ├── pages
+    │   │   ├── About.jsx
+    │   │   ├── Cart.jsx
+    │   │   ├── Collection.jsx
+    │   │   ├── Contact.jsx
+    │   │   ├── ForgotPassword.jsx
+    │   │   ├── Home.jsx
+    │   │   ├── Login.jsx
+    │   │   ├── NotFound.jsx
+    │   │   ├── Orders.jsx
+    │   │   ├── PlaceOrder.jsx
+    │   │   ├── PrivacyPolicy.jsx
+    │   │   ├── Product.jsx
+    │   │   ├── Profile.jsx
+    │   │   ├── ResetPassword.jsx
+    │   │   ├── Verify.jsx
+    │   │   └── Wishlist.jsx
+    │   └── utils
+    │       └── dimensionsConverter.js
+    ├── tailwind.config.js
+    ├── vercel.json
+    └── vite.config.js
 ```
 
-### 📦 Step 2: Setup Backend
+## ⚙️ Local Installation & Setup Guide
+
+### 1. Clone the project
+
+```bash
+git clone https://github.com/Perzival07/loknath-sofa-center.git
+cd loknath-sofa-center
+```
+
+### 2. Setup Backend
 
 ```bash
 cd backend
 npm install
 ```
 
-Create a .env file in the /backend directory:
+Create a `.env` file in the `backend/` directory with the following variables:
 
-```bash
-MONGODB_URL = your_mongodb_atlas_connection_string
-CLOUDINARY_API_KEY = your_cloudinary_api_key
-CLOUDINARY_SECRET_KEY = your_cloudinary_secret_key
-CLOUDINARY_NAME = your_cloudinary_name
-JWT_SECRET = your_jwt_secret
-ADMIN_EMAIL = "admin@example.com"
-ADMIN_PASSWORD = "admin123"
-STRIPE_SECRET_KEY = your_stripe_secret_key
-RAZORPAY_KEY_SECRET = your_razorpay_key_secret
-RAZORPAY_KEY_ID = your_razorpay_key_id
+```env
+MONGODB_URL=your_mongodb_atlas_connection_string
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_SECRET_KEY=your_cloudinary_secret_key
+CLOUDINARY_NAME=your_cloudinary_name
+JWT_SECRET=your_jwt_secret
+STRIPE_SECRET_KEY=your_stripe_secret_key
+RAZORPAY_KEY_SECRET=your_razorpay_key_secret
+RAZORPAY_KEY_ID=your_razorpay_key_id
 PORT=5000
 ```
 
-Run the backend server:
+Start the backend development server:
 
 ```bash
 npm run dev
 ```
 
-Now Backend will run on like http://localhost:5000
+### 3. Setup Frontend
 
-### 💻 Step 3: Setup Frontend
+Open a new terminal session:
 
 ```bash
 cd frontend
 npm install
 ```
 
-Create a .env file in the /frontend directory:
+Create a `.env` file in the `frontend/` directory:
 
-```bash
-VITE_BACKEND_URL= your_backend_url_port
-VITE_RAZORPAY_KEY_ID = your_razorpay_key_id
+```env
+VITE_BACKEND_URL=http://localhost:5000
+VITE_RAZORPAY_KEY_ID=your_razorpay_key_id
 ```
 
-Now Frontend will run on like http://localhost:3000
-
-### ☁️ Step 4: MongoDB Atlas Setup (Free Cloud DB)
-
-1. Visit: https://www.mongodb.com/cloud/atlas/register
-2. Create a Free Shared Cluster
-3. Create a DB user (e.g., e-commerce)
-4. Whitelist IP Address → Allow Access from Anywhere (0.0.0.0/0)
-5. Click Connect → Connect your application
-6. Copy your Mongo URI Like :
-   ```bash
-   mongodb+srv://demo:kjkfldjskdljfkls@er4ere.dfdf.hdfkjhsdfhd/jlkjfdklsjdklf?retryWrites=true&w=majority
-   ```
-7. Paste it into your .env file as MONGODB_URL
-
-### 🔐 Step 5: Admin Setup
-
-Option 1: Use Predefined Admin Credentials
-| Role | Email | Password |
-| ----- | --------------------------------------------- | -------- |
-| Admin | [admin@example.com](mailto:admin@example.com) | admin123 |
-
-Option 2: Promote Your Own Account
-
-1. Register a new user on the frontend
-
-2. Go to MongoDB Atlas → Cluster → Collections → users
-
-3. Find your user and update the role like:
-
-   ```json
-   {
-     "role": "admin"
-   }
-   ```
-
-4. Save and re-login — you now have admin access
-
-**🎯 Done! Your full-stack e-commerce site is now running locally 🚀**
-
-## 🧱 Project Structure
+Run the frontend server:
 
 ```bash
-forever-shopping/
-│
-├── backend/                  # Express backend + Mongoose schemas
-│   ├── controllers/          # Request handlers
-│   ├── models/               # MongoDB schemas
-│   ├── routes/               # API routes
-│   └── .env                  # Environment config
-│
-├── frontend/                 # React frontend
-│   ├── components/           # Reusable UI components
-│   ├── pages/                # User-facing pages
-│   ├── context/              # Auth & state management
-│   └── App.js                # Main app file
-│
-├── admin/                    # Admin dashboard
-│   ├── components/           # Admin UI components (e.g., Sidebar, Navbar)
-│   ├── pages/                # Admin pages (UserList, ProductList, Orders)
-│   ├── services/             # API calls related to admin
-│   ├── utils/                # Helper functions
-│   └── App.js                # Admin app entry point
-│
-└── README.md                 # Project guide
+npm run dev
 ```
 
-## 🔗 Live link
+### 4. Setup Admin Panel
 
-[Click here](https://forever-frontend-gamma-eight.vercel.app/)
+Open another terminal session:
 
-## 📄 License
+```bash
+cd admin
+npm install
+```
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Create any required environment variables (e.g., `VITE_BACKEND_URL`) in a `.env` file in the `admin/` directory, then start the panel:
 
-## 🙌 Acknowledgements
+```bash
+npm run dev
+```
 
-- Developed as part of the **own learning**.
-- Inspired by MERN project like Full Stack E-comerce site.
+## ☎︎ Contact & Support
 
-## ☎︎ Contact
+If you have any questions or need further clarification, please reach out!
 
-If you have any questions or need further clarification, please contact my email/ Linkedin .
-
-- **💌 Email : loknathsofacenter@gmail.com**
-
-- **🕵️‍♂️ Linkedin : [Pranto Kumar](https://www.linkedin.com/in/pranto-kumar-a326801b3/)**
-
-**⭐ If you found this project helpful, please give it a star!**
-
-This project demonstrates professional full-stack development with modern technologies, proper database integration and production-ready architecture. Perfect for showcasing your skills to potential employers!
+- **Email:** [loknathsofacenter@gmail.com](mailto:loknathsofacenter@gmail.com)
